@@ -1,0 +1,5 @@
+.vscode
+.buildozer
+__pycache__
+venv
+bin

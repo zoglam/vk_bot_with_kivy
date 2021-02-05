@@ -1,0 +1,152 @@
+<Logger>:
+    text_size: self.width - dp(20), None
+    size_hint_y: None
+    height: self.texture_size[1]
+    font_name: 'templates/fonts/RobotoMono-Regular.ttf'
+    color: 1, 0, 0, 1
+
+Screen:
+    name: 'body'
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, 0.05
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    NavigationLayout:
+        x: toolbar.height
+        ScreenManager:
+            id: screen_manager
+            Screen:
+                name: 'server'
+                BoxLayout:
+                    orientation: 'vertical'
+                    MDToolbar:
+                        id: toolbar
+                        md_bg_color: 1, 1, 1, 0
+                        specific_text_color: 0, 0, 0, 0.7
+                        elevation: 0
+                        size_hint_y: None
+                        height: dp(70)
+                        title: 'Smart Server'
+                        right_action_items: [['settings', lambda x: app.go_to_settings(screen_manager)]]
+                    ScrollView:
+                        do_scroll_x: False
+                        do_scroll_y: True
+                        size_hint: 1, 0.8
+                        bar_color: .8, .8, .8, 1
+                        bar_inactive_color: .9, .9, .9, 1
+                        bar_width: dp(3)
+                        canvas.before:
+                            Color:
+                                rgba: (0, 0, 0, 1)
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
+                        GridLayout:
+                            id: terminal
+                            size_hint_y: None
+                            height: self.minimum_height
+                            padding: dp(10)
+                            cols: 1
+
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: None
+                        height: dp(60)
+                        padding: dp(20)
+                        Widget:
+                            id: bot_status
+                            circle_color: (.8, .1, .1, 1)
+                            canvas:
+                                Color:
+                                    rgba: self.circle_color
+                                Ellipse:
+                                    pos: self.size[0] - dp(20),self.pos[1]
+                                    size: self.size[1], self.size[1]
+
+                        MDRectangleFlatIconButton:
+                            id: power
+                            icon: 'power'
+                            text: 'Power'
+                            font_size: 19
+                            width: root.width-dp(80)
+                            theme_text_color: 'Custom'
+                            text_color: 0, 0, 0, 0.7
+                            line_color: 1, 1, 0, 1
+                            icon_color: 1, 0, 1, 1
+                            pos_hint: {'center_x': .5, 'center_y': .5}
+                            on_release: app.run_bot()
+
+            Screen:
+                name: 'settings'
+                BoxLayout:
+                    orientation: 'vertical'
+                    MDToolbar:
+                        id: toolbar
+                        md_bg_color: 1, 1, 1, 0
+                        specific_text_color: 0, 0, 0, 0.7
+                        elevation: 0
+                        size_hint_y: None
+                        height: dp(70)
+                        title: 'Settings'
+                        left_action_items: [['arrow-left', lambda x: app.go_to_server(screen_manager)]]
+
+                    BoxLayout:
+                        orientation: 'vertical'
+                        padding: dp(70)
+                        halign: 'center'
+
+                        MDTextFieldRound:
+                            id: token
+                            hint_text: 'VK Bot token'
+                            size_hint: 1, None
+                            height: dp(30)
+                            icon_left: 'key-variant'
+                            normal_color: 0, 0, 0, 0.05
+                            color_active: .6, .7, .6, 1
+                            password: True
+                            mode: 'rectangle'
+
+                        Widget:
+                            size_hint: 1, None
+                            height: dp(10)
+
+                        MDTextFieldRound:
+                            id: mac_address
+                            hint_text: 'MAC address'
+                            size_hint: 1, None
+                            height: dp(30)
+                            icon_left: 'download-network'
+                            normal_color: 0, 0, 0, 0.05
+                            color_active: .6, .7, .6, 1
+                            mode: 'rectangle'
+
+                        Widget:
+                            size_hint: 1, None
+                            height: dp(10)
+
+                        MDTextFieldRound:
+                            id: ip_address
+                            hint_text: 'IP address'
+                            size_hint: 1, None
+                            height: dp(30)
+                            icon_left: 'ip-network'
+                            normal_color: 0, 0, 0, 0.05
+                            color_active: .6, .7, .6, 1
+                            mode: 'rectangle'
+
+                        Widget:
+                            size_hint: 1, None
+                            height: dp(10)
+
+                        MDTextFieldRound:
+                            id: port
+                            hint_text: 'PORT'
+                            size_hint: 1, None
+                            height: dp(30)
+                            icon_left: 'serial-port'
+                            normal_color: 0, 0, 0, 0.05
+                            color_active: .6, .7, .6, 1
+                            mode: 'rectangle'
+                        Widget:
